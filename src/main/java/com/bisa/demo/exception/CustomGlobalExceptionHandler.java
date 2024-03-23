@@ -26,7 +26,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
   
     @ExceptionHandler({ExceptionResponse.class})
     public ResponseEntity<Object> mihandleAll(Exception ex, WebRequest request) {
-        ResponseEntity<Object> out = new ResponseEntity<>(ex.getMessage(), 
+        ResponseEntity<Object> out = new ResponseEntity<>(
+                new AppDemoException(HttpStatus.BAD_REQUEST, "404", ex.getMessage()), 
                 HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST);
 
         StringBuilder sb = new StringBuilder();
@@ -41,7 +42,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     
     @ExceptionHandler({Exception.class, ConnectException.class})
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-        ResponseEntity<Object> out = new ResponseEntity<>(ex.getMessage(), 
+        ResponseEntity<Object> out = new ResponseEntity<>(
+                new AppDemoException(HttpStatus.UNPROCESSABLE_ENTITY, "500", ex.getMessage()), 
                 HttpHeaders.EMPTY, HttpStatus.UNPROCESSABLE_ENTITY);
 
         log.error(ex.getCause(),ex);

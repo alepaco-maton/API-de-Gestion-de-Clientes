@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
  *
  * @author alepaco.com
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @AllArgsConstructor
 public class AppDemoException implements Serializable {

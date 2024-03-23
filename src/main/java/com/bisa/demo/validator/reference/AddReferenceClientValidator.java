@@ -29,10 +29,14 @@ public class AddReferenceClientValidator implements IValidator<AddPersonalRefere
             return ErrorCode.ADD_PERSONAL_REFERENCE_TO_CLIENT_CLIENT_ID_IS_REQUIRED;
         }
 
-        Optional<Client> optional = clientRepository.findById(request.getPersonId());
+        Optional<Client> optional = clientRepository.findById(request.getClientId());
 
         if (!optional.isPresent()) {
             return ErrorCode.ADD_PERSONAL_REFERENCE_TO_CLIENT_CLIENT_ID_IS_INVALID;
+        }
+
+        if (optional.get().getPerson().getId().equals(request.getPersonId())) {
+            return ErrorCode.ADD_PERSONAL_REFERENCE_TO_CLIENT_CLIENT_ID_IS_INVALID_BY_THEY_ARE_THE_SAME_PERSON;
         }
 
         return ErrorCode.SUCCESSFUL;

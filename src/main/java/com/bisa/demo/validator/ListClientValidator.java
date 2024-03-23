@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 public class ListClientValidator {
    
     public ErrorCode validate(String accessibility) {
-//        if (AppTools.isBlank(accessibility)) {
-//            return ErrorCode.;
-//        }
-//
-//        if (Accessibility.isValid(accessibility))) {
-//            return ErrorCode.;
-//        }
+        if (AppTools.isBlank(accessibility)) {
+            return ErrorCode.LIST_CLIENTS_BY_ACCESSIBILITY_FILTER_ACCESSIBILITY_IS_REQUIRED;
+        }
+
+        if (Accessibility.isValid(accessibility)) {
+            return ErrorCode.LIST_CLIENTS_BY_ACCESSIBILITY_FILTER_ACCESSIBILITY_IS_INVALID;
+        }
 
         return ErrorCode.SUCCESSFUL;
     }

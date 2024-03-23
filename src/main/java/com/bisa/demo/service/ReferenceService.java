@@ -5,14 +5,12 @@
 package com.bisa.demo.service;
 
 import com.bisa.demo.commons.AddPersonalReferenceToClientMapper;
-import com.bisa.demo.commons.CreatePersonMapper;
 import com.bisa.demo.commons.RemovePersonalReferenceFromClientMapper;
 import com.bisa.demo.dto.AddPersonalReferenceToClientRequest;
 import com.bisa.demo.dto.AddPersonalReferenceToClientResponse;
 import com.bisa.demo.dto.RemovePersonalReferenceFromClientRequest;
 import com.bisa.demo.dto.RemovePersonalReferenceFromClientResponse;
 import com.bisa.demo.entity.Client;
-import com.bisa.demo.entity.Person;
 import com.bisa.demo.entity.Reference;
 import com.bisa.demo.enums.ClientStatus;
 import com.bisa.demo.exception.ErrorCode;
@@ -23,7 +21,6 @@ import com.bisa.demo.repository.IReferenceRepository;
 import com.bisa.demo.validator.AddReferenceValidator;
 import com.bisa.demo.validator.RemoveReferenceValidator;
 import java.util.List;
-import java.util.Optional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

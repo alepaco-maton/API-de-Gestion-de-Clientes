@@ -23,7 +23,7 @@ public class AddReferencePersonValidator implements IValidator<AddPersonalRefere
     IPersonRepository personRepository;
     IReferenceRepository referenceRepository;
 
-    public AddReferencePersonValidator(IPersonRepository personRepository,
+    public AddReferencePersonValidator(IPersonRepository personRepository, 
             IReferenceRepository referenceRepository) {
         this.personRepository = personRepository;
         this.referenceRepository = referenceRepository;
@@ -40,7 +40,7 @@ public class AddReferencePersonValidator implements IValidator<AddPersonalRefere
         if (!optional.isPresent()) {
             return ErrorCode.ADD_PERSONAL_REFERENCE_TO_CLIENT_PERSON_ID_IS_INVALID;
         }
-
+        
         List<Reference> reference = referenceRepository.
                 findAllByClientIdIdAndPersonIdIdAndReasonForEliminationIsNull(request.getClientId(), request.getPersonId());
 

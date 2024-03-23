@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Client {
-        
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,5 +36,5 @@ public class Client {
     private String telephone;
     private String occupation;
     private String status;
-    
+
 }
