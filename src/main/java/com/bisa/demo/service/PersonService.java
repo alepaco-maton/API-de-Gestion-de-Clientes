@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.bisa.demo.validator.ICreatePersonValidator;
 
 /**
  *
@@ -36,7 +35,7 @@ public class PersonService {
 
     @Autowired
     IPersonRepository repository;
-    
+
     @Transactional
     public CreatePersonResponse create(CreatePersonRequest request) throws ExceptionResponse {
         ErrorCode errorCode = validator.validate(request);
@@ -50,5 +49,5 @@ public class PersonService {
 
         return CreatePersonMapper.mapperToDto(model);
     }
-    
+
 }

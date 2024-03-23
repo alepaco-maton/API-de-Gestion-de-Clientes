@@ -17,10 +17,11 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreatePersonValidator {
-    
+public class CreatePersonValidator implements IValidator<CreatePersonRequest> {
+
+    @Override
     public ErrorCode validate(CreatePersonRequest request) {
-        List<ICreatePersonValidator> validators = new ArrayList<>();
+        List<IValidator<CreatePersonRequest>> validators = new ArrayList<>();
         validators.add(new CreatePersonNameValidator());
         validators.add(new CreatePersonPaterrnalLastNameValidator());
         validators.add(new CreatePersonMaterrnalLastNameValidator());
@@ -28,14 +29,14 @@ public class CreatePersonValidator {
         validators.add(new CreatePersonAddressValidator());
         validators.add(new CreatePersonIdentityCardValidator());
 
-        for (ICreatePersonValidator val : validators) {
+        for (IValidator val : validators) {
             ErrorCode errorCode = val.validate(request);
-            
+
             if (!errorCode.isSuccessfull()) {
                 return errorCode;
             }
         }
-        
+
         return ErrorCode.SUCCESSFUL;
     }
 

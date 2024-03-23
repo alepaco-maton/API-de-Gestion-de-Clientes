@@ -14,7 +14,7 @@ import com.bisa.demo.exception.ErrorCode;
  *
  * @author alepaco.com
  */
-public class CreatePersonAddressValidator implements ICreatePersonValidator {
+public class CreatePersonAddressValidator implements IValidator<CreatePersonRequest> {
 
     @Override
     public ErrorCode validate(CreatePersonRequest request) {

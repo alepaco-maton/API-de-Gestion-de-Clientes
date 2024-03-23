@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author alepaco.com
  */
 @Repository
-public interface IPersonRepository  extends JpaRepository<Person, Integer>{
-     
+public interface IPersonRepository extends JpaRepository<Person, Integer> {
+
 }

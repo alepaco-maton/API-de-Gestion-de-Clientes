@@ -13,7 +13,7 @@ import com.bisa.demo.exception.ErrorCode;
  *
  * @author alepaco.com
  */
-public class CreatePersonNameValidator implements ICreatePersonValidator {
+public class CreatePersonNameValidator implements IValidator<CreatePersonRequest> {
 
     public static final int NAME_LENGTH_MIN = 1;
     public static final int NAME_LENGTH_MAX = 100;

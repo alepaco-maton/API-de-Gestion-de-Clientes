@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author alepaco.com
  */
-public class CreatePersonDateOfBirthValidator implements ICreatePersonValidator {
+public class CreatePersonDateOfBirthValidator implements IValidator<CreatePersonRequest> {
 
     public static final long DATE_OF_BIRTH_MIN = 0L;
 

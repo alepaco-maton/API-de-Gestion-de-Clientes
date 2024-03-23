@@ -13,7 +13,7 @@ import com.bisa.demo.exception.ErrorCode;
  *
  * @author alepaco.com
  */
-public class CreatePersonMaterrnalLastNameValidator implements ICreatePersonValidator {
+public class CreatePersonMaterrnalLastNameValidator implements IValidator<CreatePersonRequest> {
 
     public static final int MATERNAL_LAST_NAME_LENGTH_MIN = 1;
     public static final int MATERNAL_LAST_NAME_LENGTH_MAX = 100;
