@@ -6,11 +6,14 @@ package com.bisa.demo.validator.createclient;
 
 import com.bisa.demo.commons.AppTools;
 import com.bisa.demo.dto.CreateClientRequest;
+import com.bisa.demo.entity.Client;
 import com.bisa.demo.entity.Person;
 import com.bisa.demo.exception.ErrorCode;
+import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.validator.IValidator;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,9 +23,11 @@ import java.util.Optional;
 public class CreateClientCannotBeLessThan20YearsOldValidator implements IValidator<CreateClientRequest> {
 
     IPersonRepository personRepository;
+    IClientRepository clientRepository;
 
-    public CreateClientCannotBeLessThan20YearsOldValidator(IPersonRepository personRepository) {
+    public CreateClientCannotBeLessThan20YearsOldValidator(IPersonRepository personRepository, IClientRepository clientRepository) {
         this.personRepository = personRepository;
+        this.clientRepository = clientRepository;
     }
     
     @Override
@@ -41,6 +46,12 @@ public class CreateClientCannotBeLessThan20YearsOldValidator implements IValidat
         
         if (!isUnder20YearsOld(AppTools.convertToDateToLocalDate(person.getDateOfBirth()))) {
             return ErrorCode.CREATE_CLIENT_PERSON_LESS_THAN_20_YEARS_OLD;
+        }
+        
+        List<Client> list = clientRepository.findAllByPersonId(request.getPersonId());
+        
+        if (!list.isEmpty()) {
+            return ErrorCode.CREATE_CLIENT_PERSON_IS_ASSOCIATED_WITH_ANOTHER_CUSTOMER;
         }
  
         return ErrorCode.SUCCESSFUL;

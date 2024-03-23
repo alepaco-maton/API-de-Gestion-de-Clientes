@@ -5,6 +5,7 @@
 package com.bisa.demo.repository;
 
 import com.bisa.demo.entity.Client;
+import com.bisa.demo.entity.Reference;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,8 +15,10 @@ import org.springframework.stereotype.Repository;
  * @author alepaco.com
  */
 @Repository
-public interface IClientRepository extends JpaRepository<Client, Integer> {
+public interface IReferenceRepository extends JpaRepository<Reference, Integer> {
 
-    List<Client> findAllByPersonId(Integer personId);
+    List<Reference> findAllByClientIdIdAndPersonIdIdAndReasonForEliminationIsNull(Integer clientId, Integer personId);
+
+    List<Reference> findAllByClientIdIdAndReasonForEliminationIsNull(Integer clientId);
 
 }

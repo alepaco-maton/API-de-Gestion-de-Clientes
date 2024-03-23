@@ -4,14 +4,13 @@
  */
 package com.bisa.demo.validator;
 
-import com.bisa.demo.dto.CreateClientRequest;
+import com.bisa.demo.dto.AddPersonalReferenceToClientRequest;
 import com.bisa.demo.exception.ErrorCode;
 import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
-import com.bisa.demo.validator.createclient.CreateClientCannotBeLessThan20YearsOldValidator;
-import com.bisa.demo.validator.createclient.CreateClientEmailValidator;
-import com.bisa.demo.validator.createclient.CreateClientOccupationValidator;
-import com.bisa.demo.validator.createclient.CreateClientTelephoneValidator;
+import com.bisa.demo.repository.IReferenceRepository;
+import com.bisa.demo.validator.reference.AddReferenceClientValidator;
+import com.bisa.demo.validator.reference.AddReferencePersonValidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +21,21 @@ import org.springframework.stereotype.Component;
  * @author alepaco.com
  */
 @Component
-public class CreateClientValidator {
-    
-    @Autowired
-    IPersonRepository personRepository;
-    
+public class AddReferenceValidator {
+
     @Autowired
     IClientRepository clientRepository;
-    
-    public ErrorCode validate(CreateClientRequest request) {
-        List<IValidator<CreateClientRequest>> validators = new ArrayList<>();
-        validators.add(new CreateClientEmailValidator());
-        validators.add(new CreateClientTelephoneValidator());
-        validators.add(new CreateClientOccupationValidator());
-        validators.add(new CreateClientCannotBeLessThan20YearsOldValidator(
-                personRepository, clientRepository));
+
+    @Autowired
+    IPersonRepository personRepository;
+
+    @Autowired
+    IReferenceRepository referenceRepository;
+
+    public ErrorCode validate(AddPersonalReferenceToClientRequest request) {
+        List<IValidator<AddPersonalReferenceToClientRequest>> validators = new ArrayList<>();
+        validators.add(new AddReferenceClientValidator(clientRepository));
+        validators.add(new AddReferencePersonValidator(personRepository, referenceRepository));
 
         for (IValidator val : validators) {
             ErrorCode errorCode = val.validate(request);
@@ -48,4 +47,5 @@ public class CreateClientValidator {
 
         return ErrorCode.SUCCESSFUL;
     }
+
 }

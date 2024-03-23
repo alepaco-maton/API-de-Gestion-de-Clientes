@@ -44,6 +44,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         ResponseEntity<Object> out = new ResponseEntity<>(ex.getMessage(), 
                 HttpHeaders.EMPTY, HttpStatus.UNPROCESSABLE_ENTITY);
 
+        log.error(ex.getCause(),ex);
+        
         StringBuilder sb = new StringBuilder();
         sb.append("-------------------RESPONSE----------------------\n").
                 append("DATA ").append(out).append(", \n").
