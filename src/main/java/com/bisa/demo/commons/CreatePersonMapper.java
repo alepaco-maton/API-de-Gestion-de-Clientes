@@ -19,7 +19,8 @@ public class CreatePersonMapper {
     public static Person mapperToEntity(CreatePersonRequest dto) {
         return new Person(null, dto.getName(), dto.getPaternalLastName(),
                 dto.getMaternalLastName(), dto.getDateOfBirth(),
-                mapperToEntityAddress(dto.getAddress()), dto.getIdentityCard());
+                mapperToEntityAddress(dto.getAddress()), 
+                dto.getIdentityCard(), false);
     }
 
     //TODO no esta definido quese tiene que retornar por tanto se retorna un objeto simple

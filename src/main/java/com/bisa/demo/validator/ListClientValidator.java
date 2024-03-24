@@ -21,7 +21,7 @@ public class ListClientValidator {
             return ErrorCode.LIST_CLIENTS_BY_ACCESSIBILITY_FILTER_ACCESSIBILITY_IS_REQUIRED;
         }
 
-        if (Accessibility.isValid(accessibility)) {
+        if (!Accessibility.isValid(accessibility)) {
             return ErrorCode.LIST_CLIENTS_BY_ACCESSIBILITY_FILTER_ACCESSIBILITY_IS_INVALID;
         }
 

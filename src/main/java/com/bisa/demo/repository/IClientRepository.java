@@ -19,39 +19,75 @@ public interface IClientRepository extends JpaRepository<Client, Integer> {
 
     List<Client> findAllByPersonId(Integer personId);
 
-    @Query(nativeQuery = true, value = "SELECT c.* "
-            + "FROM client c "
-            + "INNER JOIN reference r ON c.id = r.client_id "
-            + "GROUP BY c.id "
-            + "HAVING COUNT(r) >= ? ")
+    @Query(nativeQuery = true, value = "select u.* "
+            + "from client u "
+            + "where u.id in (SELECT * "
+            + "FROM (SELECT r.client_id as 'id' "
+            + "FROM reference r "
+            + "WHERE r.reason_for_elimination is null "
+            + "group by r.client_id "
+            + "having count(r.client_id)>=?) AS t1 "
+            + "INTERSECT "
+            + "SELECT * "
+            + "FROM (SELECT r.client_id as 'id' "
+            + "FROM reference r "
+            + "INNER JOIN person h ON r.reason_for_elimination is null AND h.id = r.person_id "
+            + "where h.is_client  "
+            + "group by r.client_id "
+            + "having count(r.client_id)>=?) AS t2) ")
     List<Client> findAllByAccessibilityGood(Integer numberReferences, Integer numberReferencesTypeClient);
 
-    @Query(nativeQuery = true, value = "SELECT c.* "
-            + "FROM clients c "
-            + "INNER JOIN references r ON c.id = r.client_id "
-            + "GROUP BY c.id "
-            + "HAVING COUNT(r) >= ? AND COUNT(DISTINCT CASE WHEN r.person_id IS NULL THEN r.id END) = ?")
-    List<Client> findAllByAccessibilityRegularOption1(Integer numberReferences, Integer numberReferencesTypeClient);
+    @Query(nativeQuery = true, value = "select c.* "
+            + "from client c "
+            + "where c.id in (SELECT r.client_id "
+            + "FROM reference r  "
+            + "inner join person p on r.reason_for_elimination is null and "
+            + "p.id = r.person_id and p.is_client = false "
+            + "where r.client_id not in (SELECT y.client_id  "
+            + "FROM reference y "
+            + "INNER JOIN person h ON r.reason_for_elimination is null AND h.id = y.person_id "
+            + "where h.is_client) "
+            + "group by r.client_id "
+            + "having count(r.client_id)>=?)")
+    List<Client> findAllByAccessibilityRegularOption1(Integer numberReferences);
 
-    @Query(nativeQuery = true, value = "SELECT c.* "
-            + "FROM clients c "
-            + "INNER JOIN references r ON c.id = r.client_id "
-            + "GROUP BY c.id "
-            + "HAVING COUNT(r) = ? AND COUNT(DISTINCT CASE WHEN r.person_id IS NULL THEN r.id END) = ?")
+    @Query(nativeQuery = true, value = "select u.* "
+            + "from client u "
+            + "where u.id in (SELECT * "
+            + "FROM (SELECT r.client_id as 'id' "
+            + "FROM reference r "
+            + "WHERE r.reason_for_elimination is null "
+            + "group by r.client_id "
+            + "having count(r.client_id)=?) AS t1 "
+            + "INTERSECT "
+            + "SELECT * "
+            + "FROM (SELECT r.client_id as 'id' "
+            + "FROM reference r "
+            + "INNER JOIN person h ON r.reason_for_elimination is null AND h.id = r.person_id "
+            + "where h.is_client  "
+            + "group by r.client_id "
+            + "having count(r.client_id)=?) AS t2) ")
     List<Client> findAllByAccessibilityRegularOption2(Integer numberReferences, Integer numberReferencesTypeClient);
 
-    @Query(nativeQuery = true, value = "SELECT c.* "
-            + "FROM clients c "
-            + "INNER JOIN references r ON c.id = r.client_id "
-            + "GROUP BY c.id "
-            + "HAVING COUNT(r) = ? AND COUNT(DISTINCT CASE WHEN r.person_id IS NULL THEN r.id END) = ?")
-    List<Client> findAllByAccessibilityRegularBad(Integer numberReferences, Integer numberReferencesTypeClient);
+    @Query(nativeQuery = true, value = "select c.* "
+            + "from client c "
+            + "where c.id in (SELECT r.client_id "
+            + "FROM reference r  "
+            + "inner join person p on r.reason_for_elimination is null AND p.id = r.person_id and p.is_client = false "
+            + "where r.client_id not in (SELECT y.client_id  "
+            + "FROM reference y "
+            + "INNER JOIN person h ON r.reason_for_elimination is null AND h.id = y.person_id "
+            + "where h.is_client) "
+            + "group by r.client_id "
+            + "having count(r.client_id)=?)")
+    List<Client> findAllByAccessibilityRegularBad(Integer numberReferences);
 
-    @Query(nativeQuery = true, value = "SELECT c.* "
-            + "FROM clients c "
-            + "INNER JOIN references r ON c.id = r.client_id "
-            + "GROUP BY c.id "
-            + "HAVING COUNT(r) = ? AND COUNT(DISTINCT CASE WHEN r.person_id IS NULL THEN r.id END) = ?")
-    List<Client> findAllByAccessibilityRegularNull(Integer numberReferences, Integer numberReferencesTypeClient);
+    @Query(nativeQuery = true, value = "select * "
+            + "from client c "
+            + "where c.id not in (SELECT r.client_id "
+            + "FROM reference r "
+            + "WHERE r.reason_for_elimination is null "
+            + "group by r.client_id) ")
+    List<Client> findAllByAccessibilityRegularNull();
 
 }

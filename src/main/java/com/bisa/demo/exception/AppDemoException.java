@@ -4,7 +4,6 @@
  */
 package com.bisa.demo.exception;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;

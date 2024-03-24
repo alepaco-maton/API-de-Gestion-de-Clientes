@@ -4,6 +4,7 @@
  */
 package com.bisa.demo.repository;
 
+import com.bisa.demo.dto.ListClientReferenceResponse;
 import com.bisa.demo.entity.Client;
 import com.bisa.demo.entity.Reference;
 import java.util.List;
@@ -20,5 +21,7 @@ public interface IReferenceRepository extends JpaRepository<Reference, Integer> 
     List<Reference> findAllByClientIdIdAndPersonIdIdAndReasonForEliminationIsNull(Integer clientId, Integer personId);
 
     List<Reference> findAllByClientIdIdAndReasonForEliminationIsNull(Integer clientId);
+
+    List<Reference> findAllByClientIdId(Integer id);
 
 }

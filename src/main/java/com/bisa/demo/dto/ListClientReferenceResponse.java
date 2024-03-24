@@ -20,6 +20,8 @@ public class ListClientReferenceResponse {
     private Integer id;
     private Integer personId;
     private String personFullName;
+    private boolean isClient;
+    private boolean referenceRemoved;
     private String reasonForElimination;
 
 }

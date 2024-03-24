@@ -37,6 +37,7 @@ public class Person {
     @Embedded
     private Address address;
     private String IdentityCard;
+    private boolean isClient;
 
     public String getFullName() {
         return name + " " + paternalLastName + " " + maternalLastName;
