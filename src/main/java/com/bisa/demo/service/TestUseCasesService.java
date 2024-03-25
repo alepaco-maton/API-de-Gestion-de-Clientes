@@ -42,7 +42,7 @@ public class TestUseCasesService {
     @PostConstruct
     public void init() {
         test = new TestUseCases(personRepository, clientRepository, referenceRepository);
-        //fillBasic();
+        fillBasic();
     }
 
     public void fillBasic() {

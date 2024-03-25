@@ -62,8 +62,6 @@ public class DataOfTestController {
             @Parameter(name = "accessibility", description = "Filtro por accesibilidad, posibles valores [BUENA, REGULAR, MALA, NULA]",
                     example = "BUENA") String accessibility) throws URISyntaxException, ExceptionResponse {
 
-        testUseCasesService.fillBasic();
-
         return ResponseEntity.ok(""" 
                                  * El identificador de cliente y persona son autoincrementables
                                  
