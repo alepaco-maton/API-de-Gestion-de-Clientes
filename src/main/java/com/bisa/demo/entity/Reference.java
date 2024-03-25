@@ -28,7 +28,7 @@ public class Reference {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     private Client clientId;
     @ManyToOne
     @JoinColumn(name = "person_id")

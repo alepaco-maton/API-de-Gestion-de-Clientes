@@ -9,7 +9,8 @@ import com.bisa.demo.dto.CreateClientResponse;
 import com.bisa.demo.dto.ListClientResponse;
 import com.bisa.demo.exception.AppDemoException;
 import com.bisa.demo.exception.ExceptionResponse;
-import com.bisa.demo.service.ClientService;
+import com.bisa.demo.service.CreateClientService;
+import com.bisa.demo.service.ListClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -46,7 +47,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
     @Autowired
-    ClientService service;
+    CreateClientService createClientService;
+
+    @Autowired
+    ListClientService listClientService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Crear cliente",
@@ -63,7 +67,7 @@ public class ClientController {
     })
     @PostMapping(consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
     public ResponseEntity<CreateClientResponse> create(@RequestBody CreateClientRequest request) throws URISyntaxException, ExceptionResponse {
-        CreateClientResponse response = service.create(request);
+        CreateClientResponse response = createClientService.create(request);
 
         return ResponseEntity.created(new URI("/" + response.getId())).body(response);
     }
@@ -85,7 +89,7 @@ public class ClientController {
     public ResponseEntity<List<ListClientResponse>> list(@RequestParam
             @Parameter(name = "accessibility", description = "Filtro por accesibilidad, posibles valores [BUENA, REGULAR, MALA, NULA]",
                     example = "BUENA") String accessibility) throws URISyntaxException, ExceptionResponse {
-        List<ListClientResponse> response = service.list(accessibility);
+        List<ListClientResponse> response = listClientService.list(accessibility);
 
         return ResponseEntity.ok().body(response);
     }

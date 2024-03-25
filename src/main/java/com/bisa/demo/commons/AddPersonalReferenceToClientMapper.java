@@ -7,8 +7,8 @@ package com.bisa.demo.commons;
 import com.bisa.demo.dto.AddPersonalReferenceToClientRequest;
 import com.bisa.demo.dto.AddPersonalReferenceToClientResponse;
 import com.bisa.demo.entity.Reference;
-import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
+import com.bisa.demo.repository.ICreateClientRepository;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.bisa.demo.repository.IPersonRepository;
 public class AddPersonalReferenceToClientMapper {
 
     public static Reference mapperToEntity(AddPersonalReferenceToClientRequest dto,
-            IClientRepository clientRepository, IPersonRepository personRepository) {
+            ICreateClientRepository clientRepository, IPersonRepository personRepository) {
         return new Reference(null,
                 clientRepository.findById(dto.getClientId()).orElse(null),
                 personRepository.findById(dto.getPersonId()).orElse(null),

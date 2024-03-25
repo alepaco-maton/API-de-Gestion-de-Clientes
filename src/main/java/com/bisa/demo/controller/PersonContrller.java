@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Personas API", description = "API para registrar personas.")
 @CrossOrigin(origins = "*", methods = {RequestMethod.POST})
 @RequestMapping("/person")
-public class CreatePersonContrller {
+public class PersonContrller {
 
     @Autowired
     PersonService service;

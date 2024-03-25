@@ -7,12 +7,14 @@ package com.bisa.demo.validator;
 import com.bisa.demo.commons.AppTools;
 import com.bisa.demo.enums.Accessibility;
 import com.bisa.demo.exception.ErrorCode;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author alepaco.com
  */
+@AllArgsConstructor
 @Component
 public class ListClientValidator {
    

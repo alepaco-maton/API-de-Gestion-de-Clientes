@@ -9,12 +9,12 @@ import com.bisa.demo.dto.CreateClientRequest;
 import com.bisa.demo.entity.Client;
 import com.bisa.demo.entity.Person;
 import com.bisa.demo.exception.ErrorCode;
-import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.validator.IValidator;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import com.bisa.demo.repository.ICreateClientRepository;
 
 /**
  *
@@ -23,9 +23,9 @@ import java.util.Optional;
 public class CreateClientCannotBeLessThan20YearsOldValidator implements IValidator<CreateClientRequest> {
 
     IPersonRepository personRepository;
-    IClientRepository clientRepository;
+    ICreateClientRepository clientRepository;
 
-    public CreateClientCannotBeLessThan20YearsOldValidator(IPersonRepository personRepository, IClientRepository clientRepository) {
+    public CreateClientCannotBeLessThan20YearsOldValidator(IPersonRepository personRepository, ICreateClientRepository clientRepository) {
         this.personRepository = personRepository;
         this.clientRepository = clientRepository;
     }
@@ -44,7 +44,8 @@ public class CreateClientCannotBeLessThan20YearsOldValidator implements IValidat
         
         Person person = optional.get();
         
-        if (!isUnder20YearsOld(AppTools.convertToDateToLocalDate(person.getDateOfBirth()))) {
+        //Un cliente no puede tener menos de 20 años.
+        if (isUnder20YearsOld(AppTools.convertToDateToLocalDate(person.getDateOfBirth()))) {
             return ErrorCode.CREATE_CLIENT_PERSON_LESS_THAN_20_YEARS_OLD;
         }
         

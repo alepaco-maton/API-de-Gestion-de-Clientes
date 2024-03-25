@@ -6,7 +6,6 @@ package com.bisa.demo.validator;
 
 import com.bisa.demo.dto.CreateClientRequest;
 import com.bisa.demo.exception.ErrorCode;
-import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.validator.createclient.CreateClientCannotBeLessThan20YearsOldValidator;
 import com.bisa.demo.validator.createclient.CreateClientEmailValidator;
@@ -14,13 +13,16 @@ import com.bisa.demo.validator.createclient.CreateClientOccupationValidator;
 import com.bisa.demo.validator.createclient.CreateClientTelephoneValidator;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.bisa.demo.repository.ICreateClientRepository;
 
 /**
  *
  * @author alepaco.com
  */
+@AllArgsConstructor
 @Component
 public class CreateClientValidator {
     
@@ -28,7 +30,7 @@ public class CreateClientValidator {
     IPersonRepository personRepository;
     
     @Autowired
-    IClientRepository clientRepository;
+    ICreateClientRepository clientRepository;
     
     public ErrorCode validate(CreateClientRequest request) {
         List<IValidator<CreateClientRequest>> validators = new ArrayList<>();

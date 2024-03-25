@@ -15,7 +15,6 @@ import com.bisa.demo.entity.Reference;
 import com.bisa.demo.enums.ClientStatus;
 import com.bisa.demo.exception.ErrorCode;
 import com.bisa.demo.exception.ExceptionResponse;
-import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.repository.IReferenceRepository;
 import com.bisa.demo.validator.AddReferenceValidator;
@@ -26,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.bisa.demo.repository.ICreateClientRepository;
 
 /**
  *
@@ -52,7 +52,7 @@ public class ReferenceService {
     IPersonRepository personRepository;
 
     @Autowired
-    IClientRepository clientRepository;
+    ICreateClientRepository clientRepository;
 
     @Transactional
     public AddPersonalReferenceToClientResponse add(AddPersonalReferenceToClientRequest request) throws ExceptionResponse {

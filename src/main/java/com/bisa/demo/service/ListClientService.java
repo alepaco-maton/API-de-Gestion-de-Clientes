@@ -4,75 +4,49 @@
  */
 package com.bisa.demo.service;
 
-import com.bisa.demo.commons.CreateClientMapper;
 import com.bisa.demo.commons.ListClientMapper;
-import com.bisa.demo.dto.CreateClientRequest;
-import com.bisa.demo.dto.CreateClientResponse;
 import com.bisa.demo.dto.ListClientResponse;
 import com.bisa.demo.entity.Client;
 import com.bisa.demo.enums.Accessibility;
 import com.bisa.demo.exception.ErrorCode;
 import com.bisa.demo.exception.ExceptionResponse;
-import com.bisa.demo.repository.IClientRepository;
-import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.repository.IReferenceRepository;
-import com.bisa.demo.validator.CreateClientValidator;
 import com.bisa.demo.validator.ListClientValidator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.bisa.demo.repository.IListClientRepository;
 
 /**
  *
  * @author alepaco.com
  */
 @Log4j2
+@AllArgsConstructor
 @Service
 @Component
-public class ClientService {
+public class ListClientService {
 
     @Autowired
     MultiLanguageMessagesService mlms;
 
     @Autowired
-    CreateClientValidator createClientValidator;
-
-    @Autowired
     ListClientValidator listClientValidator;
 
     @Autowired
-    IClientRepository repository;
-
-    @Autowired
-    IPersonRepository personRepository;
+    IListClientRepository repository;
 
     @Autowired
     IReferenceRepository referenceRepository;
 
     @Transactional
-    public CreateClientResponse create(CreateClientRequest request) throws ExceptionResponse {
-        ErrorCode errorCode = createClientValidator.validate(request);
-
-        if (!errorCode.isSuccessfull()) {
-            throw new ExceptionResponse(errorCode.getCode(),
-                    mlms.getMessage(errorCode.getCode()));
-        }
-
-        Client model = repository.save(
-                CreateClientMapper.mapperToEntity(
-                        request, personRepository));
-
-        model.getPerson().setClient(true);
-
-        return CreateClientMapper.mapperToDto(model);
-    }
-
     public List<ListClientResponse> list(String accessibility) throws ExceptionResponse {
         ErrorCode errorCode = listClientValidator.validate(accessibility);
 

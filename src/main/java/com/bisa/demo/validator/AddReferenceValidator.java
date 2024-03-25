@@ -6,7 +6,6 @@ package com.bisa.demo.validator;
 
 import com.bisa.demo.dto.AddPersonalReferenceToClientRequest;
 import com.bisa.demo.exception.ErrorCode;
-import com.bisa.demo.repository.IClientRepository;
 import com.bisa.demo.repository.IPersonRepository;
 import com.bisa.demo.repository.IReferenceRepository;
 import com.bisa.demo.validator.reference.AddReferenceClientValidator;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.bisa.demo.repository.ICreateClientRepository;
 
 /**
  *
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class AddReferenceValidator {
 
     @Autowired
-    IClientRepository clientRepository;
+    ICreateClientRepository clientRepository;
 
     @Autowired
     IPersonRepository personRepository;

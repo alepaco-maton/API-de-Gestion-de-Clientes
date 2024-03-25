@@ -27,7 +27,8 @@ public class ListClientMapper {
                 model.getReasonForElimination());
     }
 
-    public static ListClientResponse mapperToDto(Client model, IReferenceRepository referenceRepository) {
+    public static ListClientResponse mapperToDto(Client model, 
+            IReferenceRepository referenceRepository) {
         List<ListClientReferenceResponse> references = referenceRepository.
                 findAllByClientIdId(model.getId()).
                 stream().map(ref -> mapperToDto(ref)).
@@ -45,7 +46,8 @@ public class ListClientMapper {
                 model.getStatus(), references);
     }
 
-    public static List<ListClientResponse> mapperToDto(List<Client> models, IReferenceRepository referenceRepository) {
+    public static List<ListClientResponse> mapperToDto(List<Client> models, 
+            IReferenceRepository referenceRepository) {
         return models.stream().map(cl
                         -> mapperToDto(cl, referenceRepository)).
                 collect(Collectors.toList());
