@@ -55,7 +55,7 @@ public class ListClientService {
                     mlms.getMessage(errorCode.getCode()));
         }
 
-        List<ListClientResponse> response;
+        List<ListClientResponse> response = new ArrayList<>();
 
         switch (Accessibility.valueOf(accessibility.toUpperCase())) {
             case BUENA -> {
@@ -71,9 +71,7 @@ public class ListClientService {
             case NULA -> {
                 response = accessibilityNull();
 
-            }
-            default ->
-                response = new ArrayList<>();
+            } 
         }
 
         return response;

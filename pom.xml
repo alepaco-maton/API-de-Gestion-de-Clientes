@@ -97,7 +97,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
                 
         <dependency>
@@ -238,6 +238,15 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com/bisa/demo/*.java</exclude>
+                                <exclude>com/bisa/demo/dto/**</exclude>
+                                <exclude>com/bisa/demo/entity/**</exclude>
+                                <exclude>com/bisa/demo/logs/**</exclude>
+                                <exclude>com/bisa/demo/exception/**</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
