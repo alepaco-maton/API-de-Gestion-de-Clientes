@@ -43,10 +43,15 @@ public class TestUseCasesService {
     public void init() {
         test = new TestUseCases(personRepository, clientRepository, referenceRepository);
         fillBasic();
+        log.info(info());
     }
 
     public void fillBasic() {
         test.fillBasic();
+    }
+   
+    public String info() {
+        return test.info();
     }
     
 }

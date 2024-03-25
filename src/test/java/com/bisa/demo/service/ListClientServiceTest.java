@@ -70,7 +70,8 @@ public class ListClientServiceTest {
         testUseCases = new TestUseCases(personRepository,
                 clientRepository, referenceRepository);
 
-        testUseCases.fillBasic();
+        testUseCases.fillBasic(); 
+        System.out.println(testUseCases.info());
 
         service = new ListClientService(mlms, listClientValidator,
                 listClientRepository, referenceRepository);
