@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                powershell 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') { 
             steps {
-                sh 'mvn test' 
+                powershell 'mvn test' 
             }
             post {
                 always {
