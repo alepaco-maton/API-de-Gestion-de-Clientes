@@ -250,6 +250,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>9.0.9</version> 
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <nvdApiKey>6f16d234-7062-4b8d-981a-92f51cb61e51</nvdApiKey>
+                        </configuration>
+                    </execution>
+                </executions>
+                
+                <configuration>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                                        <suppressionFiles>
+                        <file>${project.basedir}/dependency-check-suppressions.xml</file>
+                    </suppressionFiles>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build> 
     <reporting>

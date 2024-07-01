@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 public class ExceptionResponse extends Exception {
     
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     public ExceptionResponse(String code, String message) {
         this.code = code;

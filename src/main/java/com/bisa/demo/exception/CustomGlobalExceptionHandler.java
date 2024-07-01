@@ -34,9 +34,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         ExceptionResponse exception = (ExceptionResponse) ex;
         
         ResponseEntity<Object> out = new ResponseEntity<>(
-                new AppDemoException(HttpStatus.BAD_REQUEST, exception.getCode(), 
+                new AppDemoException(HttpStatus.UNPROCESSABLE_ENTITY, exception.getCode(), 
                         exception.getMessage()),
-                HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST);
+                HttpHeaders.EMPTY, HttpStatus.UNPROCESSABLE_ENTITY);
 
         StringBuilder sb = new StringBuilder();
         sb.append("-------------------RESPONSE----------------------\n").

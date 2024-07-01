@@ -1,0 +1,21 @@
+## YAML Template.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1  # Inicia con una instancia
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: api_de_gestion_de_clientes
+        ports:
+        - containerPort: 8080  # Puerto de tu aplicación
