@@ -1,6 +1,6 @@
 ## YAML Template.
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: my-app-hpa
@@ -11,11 +11,10 @@ spec:
     name: my-app
   minReplicas: 1  # Siempre mantener al menos una instancia
   maxReplicas: 2  # Limite máximo de instancias
-  targetCPUUtilizationPercentage: 50  # Escalar cuando la CPU alcanza el 50%
- metrics:
-  - type: Custom
-    name: requests_per_minute
+  metrics:
+  - type: Resource
     resource:
-      name: custom.metrics.my-app/requests-per-minute
-      targetAverageValue: 5  # Escalar cuando hay 20 solicitudes por minuto
-
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50 

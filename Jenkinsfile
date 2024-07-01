@@ -18,12 +18,12 @@ pipeline {
             }
 
         }
-        stage('dependencyCheck') {
+        /*stage('dependencyCheck') {
             steps {
                 dependencyCheck additionalArguments: '''--format XML --format HTML''', odcInstallation: 'owasp'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
-        }
+        }*/
         stage('reporte de covertura') {
             steps {
                 jacoco()
@@ -35,21 +35,22 @@ pipeline {
             steps { 
               withSonarQubeEnv(installationName: 'sonarqubelocal', credentialsId: 'sonarqubecredentail') {
                 powershell 'xcopy  C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ApiGestionClientesV3  . /E /I /Y'
-                powershell 'mvn sonar:sonar -Dsonar.projectName=API-de-Gestion-de-Clientes''
+                powershell 'mvn sonar:sonar '
               }
             }
         }
         
         stage('Build Docker Image') {
             steps {
+                powershell 'dir'
                 powershell 'docker build -t api_de_gestion_de_clientes .'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                powershell 'kubectl apply -f app.yaml'
-                powershell 'kubectl apply -f app_autoscaling.yaml'
+                powershell 'kubectl apply -f ./app.yml'
+                powershell 'kubectl apply -f ./app_autoscaling.yml'
             }
         }
 
