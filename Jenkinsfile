@@ -49,8 +49,9 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                powershell 'kubectl apply -f ./app.yml'
-                powershell 'kubectl apply -f ./app_autoscaling.yml'
+                powershell 'docker version'
+                powershell 'kubectl apply -f app.yaml'
+                powershell 'kubectl apply -f app_autoscaling.yaml'
             }
         }
 
